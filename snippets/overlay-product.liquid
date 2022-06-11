@@ -1,0 +1,36 @@
+{% comment %}
+    Renders a product card
+
+    Accepts:
+    - card_product: {Object} Product Liquid object (optional)
+    - media_aspect_ratio: {String} Size of the product image card. Values are "square" and "portrait". Default is "square" (optional)
+    - show_secondary_image: {Boolean} Show the secondary image on hover. Default: false (optional)
+    - show_vendor: {Boolean} Show the product vendor. Default: false
+    - show_rating: {Boolean} Show the product rating. Default: false
+    - extend_height: {Boolean} Card height extends to available container space. Default: true (optional)
+    - lazy_load: {Boolean} Image should be lazy loaded. Default: true (optional)
+    - show_quick_add: {Boolean} Show the quick add button.
+    - section_id: {String} The ID of the section that contains this card.
+
+    Usage:
+    {% render 'card-product', show_vendor: section.settings.show_vendor %}
+{% endcomment %}
+
+{%- style -%}
+ .product-overlay {
+  position:absolute;
+  left: calc(50%);
+  top: calc(50%);
+  transform: translate(-50%, -50%);
+
+ }
+{%- endstyle -%}
+
+{{ 'component-rating.css' | asset_url | stylesheet_tag }}
+
+{%- if card_product and card_product != empty -%}
+    {% assign product = all_products[card_product] %}
+    <a class="product-overlay" href=" {{ product.url }} ">
+      <img width="700" height="700" loading="lazy" src="{{ product | image_url: width: 700, height: 700 }}" />
+    </a>
+{%- endif -%}

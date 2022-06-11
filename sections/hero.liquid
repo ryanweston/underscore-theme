@@ -1,0 +1,52 @@
+{%- style -%}
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+    .hero-title {
+      font-size: {{ section.settings.font_size }}em;
+      line-height: 1;
+      font-weight: 800;
+    }
+  }
+{%- endstyle -%}
+
+<link rel="stylesheet" href="{{ 'component-deferred-media.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<div class="isolate">
+  <div style="position:relative;" class="page-width{% if section.settings.heading == blank %} no-heading{% endif %} section-{{ section.id }}-padding">
+    {% if section.settings.product %}
+      {% render 'overlay-product',
+        card_product: section.settings.product,
+      %}
+    {% endif %}
+    <h1 class="hero-title">{{ section.settings.title | upcase }}</h1>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.hero.name",
+  "class": "section",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.hero.settings.title.label"
+    },
+    { 
+      "type": "number",
+      "id": "font_size",
+      "label": "t:sections.hero.settings.font-size.label",
+      "default": 5
+    },
+    { 
+      "type": "product",
+      "id": "product",
+      "label": "t:sections.hero.settings.product.label"
+    }
+  ]
+}
+{% endschema %}
