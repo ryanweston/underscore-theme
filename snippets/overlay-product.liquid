@@ -21,8 +21,77 @@
   position:absolute;
   left: calc(50%);
   top: calc(50%);
+  font-weight:800;
   transform: translate(-50%, -50%);
+  z-index:4;
+ }
 
+ .background-overlay {
+  display:none;
+  position:absolute;
+  top:0;
+  left:0;
+  opacity:0.3;
+  width:100vw;
+  height:100vw;
+  background-color:black;
+  z-index:1;
+ }
+
+.circle {
+  display:none;
+  position:relative;
+  height:700px;
+  width:700px;
+  z-index:3;
+  color: rgba(0, 0, 255, 1);
+ }
+
+ .circle-2 {
+  display:none;
+  position:relative;
+  height:80vw;
+  width:80vw;
+  background: radial-gradient(50% 50% at 50% 50%, #FF0000 0%, rgba(255, 255, 255, 0) 100%);
+  z-index:2;
+  color: rgba(0, 0, 255, 1);
+ }
+
+ .product-overlay__container:hover .circle__content {
+  position:absolute;
+  white-space: nowrap;
+  font-size:10em;
+  font-weight:800;
+  line-height:0.8;
+  left: calc(50%);
+  top: 0;
+  margin-top:0.7em;
+  transform: translate(-50%, -45%);
+ }
+
+ .circle__content__second {
+  position:absolute;
+  top: 0;
+  left: calc(50%);
+  transform: translate(-50%, -45%);
+  font-weight:600;
+ }
+
+ .product-overlay__container:hover .circle, .product-overlay__container:hover .circle-2 {
+  display:block;
+  position:absolute;
+  left: calc(50%);
+  top: calc(50%);
+  transform: translate(-50%, -50%);
+ }
+
+ .product-overlay__container:hover .background-overlay { 
+  display:block;
+ }
+
+  .product-overlay img{
+  width:600px;
+  height:600px;
  }
 {%- endstyle -%}
 
@@ -30,7 +99,15 @@
 
 {%- if card_product and card_product != empty -%}
     {% assign product = all_products[card_product] %}
-    <a class="product-overlay" href=" {{ product.url }} ">
-      <img width="700" height="700" loading="lazy" src="{{ product | image_url: width: 700, height: 700 }}" />
-    </a>
+    <div class="product-overlay__container">
+      <a class="product-overlay" href=" {{ product.url }} ">
+        <img width="700" height="700" loading="lazy" src="{{ product | image_url: width: 700, height: 700 }}" />
+      </a>
+      <div class="circle">
+        <h2 class="circle__content">0X00023</h2>
+        <h3 class="circle__content__second">////// LIMITED EDITION</h3>
+      </div>
+      <div class="circle-2"></div>
+      <div class="background-overlay"></div>
+    </div>
 {%- endif -%}

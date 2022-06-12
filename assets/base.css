@@ -2218,7 +2218,6 @@ input[type='checkbox'] {
 .header-wrapper {
   display: block;
   position: relative;
-  background-color: rgb(var(--color-background));
 }
 
 .header-wrapper--border-bottom {
@@ -2624,7 +2623,6 @@ details[open] > .header__menu-item .icon-caret {
 .header__active-menu-item {
   transition: text-decoration-thickness var(--duration-short) ease;
   color: rgb(var(--color-foreground));
-  text-decoration: underline;
   text-underline-offset: 0.3rem;
 }
 
